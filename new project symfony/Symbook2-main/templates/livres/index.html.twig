@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+{% block body %}
+<h1>Liste des livres</h1>
+  <form action="{{ path('admin_livres') }}" method="get">
+        <input type="text" name="search" placeholder="Rechercher par titre ou auteur" value="{{ searchTerm }}">
+        <button type="submit">Rechercher</button>
+    </form>
+<table class="table">
+	<tr>
+		<th>Titre</th>
+		<th>ISBN</th>
+		<th>Editeur</th>
+		<th>Date Edition</th>
+		<th>Prix(DT)</th>
+		<th colspan="3">Action</th>
+	</tr>
+
+	{% for livre in livres %}
+		<tr>
+			<td>{{livre.titre|capitalize}}</td>
+			<td>{{livre.isbn}}</td>
+			<td>{{livre.editeur}}</td>
+			<td>{{livre.editedAt|date('d-m-Y')}}</td>
+			<td>{{livre.prix}}</td>
+			<td>
+				<a href="{{url('admin_livres_show',{'id':livre.id})}}" class="btn btn-success btn-sm">Voir détail...</a>
+			</td>
+			<td>
+				<a href="#" class="btn btn-danger btn-sm">Supprimer</a>
+			</td>
+			<td>
+				<a href="#" class="btn btn-primary btn-sm">Editer</a>
+			</td>
+		</tr>
+	</td>
+</tr>{% endfor %}</table>{% endblock %}
